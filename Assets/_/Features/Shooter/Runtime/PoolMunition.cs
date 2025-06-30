@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Shooter.Runtime
 {
     public class PoolMunition : MonoBehaviour
     {
         [Header("prefab bubble")]
-        public GameObject bubblePrefab;
+        public GameObject AmmoPrefab;
         public int PoolSize = 100;
 
         private List<GameObject> bubblesPool;
@@ -17,7 +18,7 @@ namespace Shooter.Runtime
 
             for (int i = 0; i < PoolSize; i++)
             {
-                GameObject bubble = Instantiate(bubblePrefab);
+                GameObject bubble = Instantiate(AmmoPrefab);
                 bubble.SetActive(false);
                 bubblesPool.Add(bubble);
             }
@@ -33,7 +34,7 @@ namespace Shooter.Runtime
                     return bubble;
                 }
             }
-            GameObject newBubble = Instantiate(bubblePrefab);
+            GameObject newBubble = Instantiate(AmmoPrefab);
             newBubble.SetActive(true);
             bubblesPool.Add(newBubble);
             return newBubble;
