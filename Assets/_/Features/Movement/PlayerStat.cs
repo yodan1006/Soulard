@@ -1,5 +1,5 @@
-using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace Movement.Runtime
@@ -16,7 +16,9 @@ namespace Movement.Runtime
 
         private void Awake()
         {
-            _currentHealth = _maxHealth;
+            _currentHealth = _maxHealth/2;
+            _healthSlider.value = _currentHealth;
+            _healthSlider.maxValue = _maxHealth;
         }
 
         void Start()
@@ -35,15 +37,29 @@ namespace Movement.Runtime
             if (other.gameObject.layer == _layerMask.value)
             {
                 _currentHealth--;
+                _healthSlider.value = _currentHealth;
                 m_currentHealth = _currentHealth;
                 Death();
             }
 
             if (other.gameObject.layer == _layerHealth.value)
             {
-                _currentHealth++;
-                m_currentHealth = _currentHealth;
+                if (_currentHealth < _maxHealth)
+                {
+                    _currentHealth++;
+                    _healthSlider.value = _currentHealth;
+                    m_currentHealth = _currentHealth;
+                }
             }
+        }
+
+        public void Ultimate(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed && _currentHealth == _maxHealth)
+            {
+                Instantiate(_colliderUltimate, transform.position, Quaternion.identity);
+            }
+            
         }
 
         #endregion
@@ -57,13 +73,32 @@ namespace Movement.Runtime
         
         
         #region Utils
-        
+
+        [ContextMenu("Damage")]
+        private void Damage()
+        {
+            _currentHealth--;
+            _healthSlider.value = _currentHealth;
+            Death();
+        }
+
+        [ContextMenu("Health")]
+        private void Health()
+        {
+            if (_currentHealth < _maxHealth)
+            {
+                _currentHealth++;
+                _healthSlider.value = _currentHealth;
+            }
+        }
         
 
         private void Death()
         {
             if (_currentHealth <= 0) gameObject.SetActive(false);
         }
+        
+        
         
         #endregion
         
@@ -79,7 +114,11 @@ namespace Movement.Runtime
         [Header("Layer Health")]
         [SerializeField] private LayerMask _layerHealth;
         
+        [Header("Ultimate")]
+        [SerializeField] private Collider _colliderUltimate;
+        
         private int _currentHealth;
+        private bool _ultimate;
 
         #endregion
     }
