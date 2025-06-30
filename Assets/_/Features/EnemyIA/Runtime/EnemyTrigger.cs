@@ -1,4 +1,5 @@
 using System;
+using EnemyGenerator.Runtime;
 using UnityEngine;
 
 namespace EnemyIa.Runtime
@@ -18,6 +19,7 @@ namespace EnemyIa.Runtime
 
         private void Start()
         {
+            _poolEnemy = FindFirstObjectByType<PoolEnemy>();
             _timeOrigin = _timeDispawn;
         }
 
@@ -28,7 +30,8 @@ namespace EnemyIa.Runtime
                 _timeDispawn -= Time.deltaTime;
                 if (_timeDispawn >= 0)
                 {
-                    Destroy(gameObject);
+                    gameObject.SetActive(false);
+                    _poolEnemy.ReturnObject(gameObject);
                 }
             }
         }
@@ -65,7 +68,8 @@ namespace EnemyIa.Runtime
         private float _timeOrigin;
         [SerializeField] private float _timeDispawn;
         private bool _OnAnimeTouchPlay;
-        
+        [SerializeField]private PoolEnemy _poolEnemy;
+
         #endregion
     }
 }
