@@ -35,7 +35,7 @@ namespace Movement.Runtime
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.layer == _layerMask.value)
+            if (other.gameObject.layer == LayerMask.NameToLayer("BulletEnemy"))
             {
                 _currentHealth--;
                 _healthSlider.value = _currentHealth;
