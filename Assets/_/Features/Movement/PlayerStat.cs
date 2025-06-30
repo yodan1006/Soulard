@@ -30,26 +30,21 @@ namespace Movement.Runtime
         
         void Update()
         {
-            
+            _healthSlider.value = _currentHealth;
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("BulletEnemy"))
             {
-                _currentHealth--;
-                _healthSlider.value = _currentHealth;
-                m_currentHealth = _currentHealth;
-                Death();
+                Damage();
             }
 
             if (other.gameObject.layer == _layerHealth.value)
             {
                 if (_currentHealth < _maxHealth)
                 {
-                    _currentHealth++;
-                    _healthSlider.value = _currentHealth;
-                    m_currentHealth = _currentHealth;
+                   Health();
                 }
             }
         }
@@ -79,7 +74,7 @@ namespace Movement.Runtime
         private void Damage()
         {
             _currentHealth--;
-            _healthSlider.value = _currentHealth;
+            m_currentHealth = _currentHealth;
             Death();
         }
 
@@ -89,7 +84,7 @@ namespace Movement.Runtime
             if (_currentHealth < _maxHealth)
             {
                 _currentHealth++;
-                _healthSlider.value = _currentHealth;
+                m_currentHealth = _currentHealth;
             }
         }
         
