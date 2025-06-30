@@ -33,6 +33,7 @@ namespace EnemyIa.Runtime
                     if (_timeAttack >= _interval)
                     {
                         Attack(_target);
+                        _timeAttack = 0.0f;
                     }
                     break;
             }
