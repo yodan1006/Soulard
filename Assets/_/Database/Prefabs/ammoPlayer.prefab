@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1512064037079046426}
   - component: {fileID: 6372825836881528113}
   - component: {fileID: 3819332778414048478}
+  - component: {fileID: 3092187018773487789}
   - component: {fileID: 5284133325509238872}
   m_Layer: 17
   m_Name: ammoPlayer
@@ -111,6 +112,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &3092187018773487789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253945383278620727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3c823922137e4b40af46194fdc41786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timeLife: 3
+  _player: {fileID: 0}
 --- !u!54 &5284133325509238872
 Rigidbody:
   m_ObjectHideFlags: 0
