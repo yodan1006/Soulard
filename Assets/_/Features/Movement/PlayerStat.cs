@@ -40,20 +40,28 @@ namespace Movement.Runtime
                 Damage();
             }
 
-            if (other.gameObject.layer == _layerHealth.value)
-            {
-                if (_currentHealth < _maxHealth)
+
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Reload"))
+            {   
+                _timerHealth -= Time.deltaTime;
+                if (_currentHealth < _maxHealth && _timerHealth >= _timerHealth)
                 {
-                   Health();
+                    Health();
                 }
             }
         }
 
         public void Ultimate(InputAction.CallbackContext context)
         {
-            if (context.phase == InputActionPhase.Performed && _currentHealth == _maxHealth)
+            if (context.performed && _currentHealth == _maxHealth)
             {
-                Instantiate(_colliderUltimate, transform.position, Quaternion.identity);
+                _colliderUltimate.enabled = true;
+                _ultimateTimer += Time.deltaTime;
+                if (_ultimateTimer >= 2) _colliderUltimate.enabled = false;
             }
             
         }
@@ -104,6 +112,9 @@ namespace Movement.Runtime
         [SerializeField] private int _maxHealth = 10;
         [SerializeField] private Slider _healthSlider;
         
+        [Header("Time Health")]
+        [SerializeField] private float _timerHealth = 3f;
+        
         [Header("Layer Damage")]
         [SerializeField] private LayerMask _layerMask;
         
@@ -115,6 +126,8 @@ namespace Movement.Runtime
         
         private int _currentHealth;
         private bool _ultimate;
+        [SerializeField] private float _ultimateTimer;
+        
 
         #endregion
     }
