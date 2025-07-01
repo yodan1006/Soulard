@@ -31,9 +31,9 @@ namespace EnemyIa.Runtime
             switch (_etat)
             {
                 case Etat.idle:
-                    if (_OnTouched)
+                    if (_typeIa == TypeIA.civil)
                     {
-                        _etat = Etat.Attack;
+                        //_animator.SetBool()
                     }
                     break;
                 case Etat.Attack:
@@ -61,6 +61,8 @@ namespace EnemyIa.Runtime
             GameObject bottle = Instantiate(_bottlePrefab, transform.position, Quaternion.identity);
             Rigidbody rb = bottle.GetComponent<Rigidbody>();
 
+            Bottle bottleScript = bottle.GetComponent<Bottle>();
+            bottleScript.launcher = gameObject;
             if (rb != null)
             {
                 Vector3 direction = (target.transform.position - transform.position).normalized;
@@ -78,7 +80,13 @@ namespace EnemyIa.Runtime
 
         #region Utils
 
-        
+        public void SetTarget(GameObject newTarget)
+        {
+            if (_typeIa == TypeIA.enemy || _etat == Etat.Attack) return;
+            _target = newTarget;
+            _etat = Etat.Attack;
+            _OnTouched = true;
+        }
 
         #endregion
 
@@ -94,6 +102,7 @@ namespace EnemyIa.Runtime
         
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private Etat _etat;
+        [SerializeField] private TypeIA _typeIa;
         private bool _OnAttack;
         private GameObject _target;
         [SerializeField] private float _distanceForMelee;
@@ -110,5 +119,11 @@ namespace EnemyIa.Runtime
             Attack,
         }
         #endregion
+
+        private enum TypeIA
+        {
+            civil,
+            enemy
+        }
     }
 }
