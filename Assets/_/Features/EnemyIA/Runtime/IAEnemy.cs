@@ -31,18 +31,14 @@ namespace EnemyIa.Runtime
             switch (_etat)
             {
                 case Etat.idle:
-                    if (_OnTouched)
+                    if (_typeIa == TypeIA.civil)
                     {
-                        _etat = Etat.Attack;
+                        //_animator.SetBool()
                     }
                     break;
                 case Etat.Attack:
                     _timeAttack += Time.deltaTime;
-                    if (_timeAttack >= _interval)
-                    {
-                        Attack(_target);
-                        _timeAttack = 0.0f;
-                    }
+                    Attack(_target);
                     break;
             }
         }
@@ -52,19 +48,27 @@ namespace EnemyIa.Runtime
             _agent.SetDestination(target.transform.position);
             if (Vector3.Distance(_agent.transform.position, target.transform.position) < _distanceForMelee)
                 Melee();
-            else
+            else if (_timeAttack >= _interval)
+            {
                 JetBottle(target);
+                _timeAttack = 0.0f;
+            }
+
         }
 
         private void JetBottle(GameObject target)
         {
             GameObject bottle = Instantiate(_bottlePrefab, transform.position, Quaternion.identity);
             Rigidbody rb = bottle.GetComponent<Rigidbody>();
+            
+            Vector3 dir = (target.transform.position - transform.position).normalized;
 
+            Bottle bottleScript = bottle.GetComponent<Bottle>();
+            bottleScript.launcher = gameObject;
+            bottleScript.InitDirection(dir);
             if (rb != null)
             {
-                Vector3 direction = (target.transform.position - transform.position).normalized;
-                rb.AddForce(direction * _jetForce, ForceMode.Impulse);
+                rb.AddForce(dir * _jetForce, ForceMode.Impulse);
             }
         }
 
@@ -78,7 +82,13 @@ namespace EnemyIa.Runtime
 
         #region Utils
 
-        
+        public void SetTarget(GameObject newTarget)
+        {
+            if (_typeIa == TypeIA.enemy || _etat == Etat.Attack) return;
+            _target = newTarget;
+            _etat = Etat.Attack;
+            _OnTouched = true;
+        }
 
         #endregion
 
@@ -94,6 +104,7 @@ namespace EnemyIa.Runtime
         
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private Etat _etat;
+        [SerializeField] private TypeIA _typeIa;
         private bool _OnAttack;
         private GameObject _target;
         [SerializeField] private float _distanceForMelee;
@@ -110,5 +121,11 @@ namespace EnemyIa.Runtime
             Attack,
         }
         #endregion
+
+        private enum TypeIA
+        {
+            civil,
+            enemy
+        }
     }
 }
