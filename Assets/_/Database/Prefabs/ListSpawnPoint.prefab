@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_prefabSlime:
-  - {fileID: 2888549904173408310, guid: 2d3c6d8ca687f0c4193b8eccbeccae81, type: 3}
+  - {fileID: 3177360103660308512, guid: 52913252f1630bf4488acc8e6588126c, type: 3}
 --- !u!114 &3085556670075500501
 MonoBehaviour:
   m_ObjectHideFlags: 0
