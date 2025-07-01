@@ -10,6 +10,7 @@ namespace Movement.Runtime
     {
         #region Publics
         
+        [HideInInspector]
         public int m_currentHealth;
         
         #endregion

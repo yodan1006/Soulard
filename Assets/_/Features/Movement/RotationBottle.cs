@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Movement.Runtime
@@ -6,10 +7,24 @@ namespace Movement.Runtime
     {
         #region Api Unity
 
+        private void Awake()
+        {
+            _player = GameObject.FindGameObjectWithTag("Player");
+        }
+
+        private void OnEnable()
+        {
+            _currentTimeLife = _timeLife;
+            transform.right = _player.transform.right;
+        }
+
         void Update()
         {
             Rotate();
+            _currentTimeLife -= Time.deltaTime;
+            if (_currentTimeLife < 0) gameObject.SetActive(false);
         }
+        
         #endregion
         
         
@@ -27,7 +42,7 @@ namespace Movement.Runtime
 
         private void Rotate()
         {
-            _rotation.z -= 90f;
+            _rotation.x += 90f;
             transform.Rotate(_rotation, 720f * Time.deltaTime );
         }
         
@@ -37,7 +52,13 @@ namespace Movement.Runtime
         #region Private And Protected
         
         private Vector3 _rotation;
-        
+
+        [Header("Time Ammo Life")]
+        [SerializeField] private float _timeLife = 3f;
+        private float _currentTimeLife;
+
+        [SerializeField] private GameObject _player;
+
         #endregion
     }
 }
