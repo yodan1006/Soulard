@@ -57,9 +57,11 @@ namespace Movement.Runtime
 
         public void Ultimate(InputAction.CallbackContext context)
         {
-            if (context.phase == InputActionPhase.Performed && _currentHealth == _maxHealth)
+            if (context.performed && _currentHealth == _maxHealth)
             {
-                Instantiate(_colliderUltimate, transform.position, Quaternion.identity);
+                _colliderUltimate.enabled = true;
+                _ultimateTimer += Time.deltaTime;
+                if (_ultimateTimer >= 2) _colliderUltimate.enabled = false;
             }
             
         }
@@ -124,6 +126,7 @@ namespace Movement.Runtime
         
         private int _currentHealth;
         private bool _ultimate;
+        [SerializeField] private float _ultimateTimer;
         
 
         #endregion
