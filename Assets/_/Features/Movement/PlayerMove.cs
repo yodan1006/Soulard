@@ -21,14 +21,20 @@ namespace Movement.Runtime
         
         void FixedUpdate()
         {
-            Vector3 movementVector = transform.TransformDirection(new Vector3(0, 0, _move.y));
+            Vector3 movementVector = transform.TransformDirection(new Vector3(_move.x, 0, _move.y));
             _rigidbody.linearVelocity = movementVector * _moveSpeed ;
-            transform.Rotate(0,_move.x,0);
+            float rotate = _rotation.x * _rotationSpeed * _mouseSensitivity * Time.deltaTime;
+            transform.Rotate(0,rotate,0);
         }
 
         public void OnMove(InputAction.CallbackContext context)
         {
             _move = context.ReadValue<Vector2>();
+        }
+
+        public void LookAt(InputAction.CallbackContext context)
+        {
+            _rotation = context.ReadValue<Vector2>();
         }
         
         #endregion
@@ -44,8 +50,11 @@ namespace Movement.Runtime
         #region Private And Protected
         
         [SerializeField] private float _moveSpeed = 5f;
+        [SerializeField] private float _rotationSpeed = 90f;
+        [SerializeField] private float _mouseSensitivity = 1.0f;
 
         private Vector2 _move;
+        private Vector2 _rotation;
         private Rigidbody _rigidbody;
         
         #endregion
