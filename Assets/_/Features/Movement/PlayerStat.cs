@@ -1,4 +1,5 @@
 using System;
+using Life.Runtime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ namespace Movement.Runtime
     {
         #region Publics
         
-        private int m_currentHealth;
+        public int m_currentHealth;
         
         #endregion
         
@@ -20,17 +21,25 @@ namespace Movement.Runtime
             _currentHealth = _maxHealth/2;
             _healthSlider.value = _currentHealth;
             _healthSlider.maxValue = _maxHealth;
-        }
-
-        void Start()
-        {
+            _zone = FindObjectsByType<LifeZone>(FindObjectsSortMode.None)[0];
             
         }
-
         
         void Update()
         {
             _healthSlider.value = _currentHealth;
+            m_currentHealth = _currentHealth;
+            
+            if (_ultimate)
+            {
+                _delayTimeUltimate += Time.deltaTime;
+                _currentHealth = _maxHealth/2;
+            }
+            if (_delayTimeUltimate >= _ultimateTimer)
+            {
+                _colliderUltimate.enabled = false;
+                _ultimate = false;
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -39,19 +48,25 @@ namespace Movement.Runtime
             {
                 Damage();
             }
-
-
         }
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.gameObject.layer == LayerMask.NameToLayer("Reload"))
+            var zone = other.GetComponent<LifeZone>();
+            if (zone != null)
             {   
-                _timerHealth -= Time.deltaTime;
-                if (_currentHealth < _maxHealth && _timerHealth >= _timerHealth)
-                {
-                    Health();
-                }
+                _zone = zone;
+                _zoneLife = true;
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            var zone = other.GetComponent<LifeZone>();
+            if (zone != null && zone == _zone)
+            {
+                _zone = null;
+                _zoneLife = false;
             }
         }
 
@@ -60,10 +75,23 @@ namespace Movement.Runtime
             if (context.performed && _currentHealth == _maxHealth)
             {
                 _colliderUltimate.enabled = true;
-                _ultimateTimer += Time.deltaTime;
-                if (_ultimateTimer >= 2) _colliderUltimate.enabled = false;
+                _ultimate = true;
             }
             
+        }
+
+        public void PickUpBottle(InputAction.CallbackContext context)
+        {
+            if (context.started && _zone != null)
+            {
+                if (_zone.m_currentnumbers >= 1)
+                {
+                    _zone.m_currentnumbers -= 1;
+                    Health();
+                    Debug.Log("Picked up bottle");
+                }
+                
+            }
         }
 
         #endregion
@@ -82,18 +110,17 @@ namespace Movement.Runtime
         private void Damage()
         {
             _currentHealth--;
-            m_currentHealth = _currentHealth;
             Death();
         }
 
         [ContextMenu("Health")]
         private void Health()
         {
-            if (_currentHealth < _maxHealth)
+            if (_currentHealth < _maxHealth && _zone.m_currentnumbers > 0)
             {
-                _currentHealth++;
-                m_currentHealth = _currentHealth;
+                _currentHealth+= _zone.m_life;
             }
+            if(_currentHealth >= _maxHealth) _currentHealth = _maxHealth;
         }
         
 
@@ -101,8 +128,6 @@ namespace Movement.Runtime
         {
             if (_currentHealth <= 0) gameObject.SetActive(false);
         }
-        
-        
         
         #endregion
         
@@ -121,12 +146,18 @@ namespace Movement.Runtime
         [Header("Layer Health")]
         [SerializeField] private LayerMask _layerHealth;
         
+        private bool _zoneLife;
+        private LifeZone _zone;
+        
         [Header("Ultimate")]
         [SerializeField] private Collider _colliderUltimate;
+        [SerializeField] private float _ultimateTimer;
+
         
         private int _currentHealth;
         private bool _ultimate;
-        [SerializeField] private float _ultimateTimer;
+        private float _delayTimeUltimate;
+        
         
 
         #endregion
