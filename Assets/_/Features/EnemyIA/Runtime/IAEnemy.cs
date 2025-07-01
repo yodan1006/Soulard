@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
@@ -15,15 +18,21 @@ namespace EnemyIa.Runtime
 
         #region Unity Api
 
+        private void Awake()
+        {
+        }
+
         private void Start()
         {
+            int random = UnityEngine.Random.Range(0, _animatorControllers.Count);
+            _animator.runtimeAnimatorController = _animatorControllers[random];
+            
             if (gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
                 if (playerObject != null)
                     _target = playerObject;
             }
-
         }
 
         private void Update()
@@ -38,6 +47,7 @@ namespace EnemyIa.Runtime
                     break;
                 case Etat.Attack:
                     _timeAttack += Time.deltaTime;
+                    _animator.SetBool("OnMove", true);
                     Attack(_target);
                     break;
             }
@@ -45,13 +55,17 @@ namespace EnemyIa.Runtime
 
         private void Attack(GameObject target)
         {
+            AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
             _agent.SetDestination(target.transform.position);
             if (Vector3.Distance(_agent.transform.position, target.transform.position) < _distanceForMelee)
                 Melee();
             else if (_timeAttack >= _interval)
             {
+                _animator.SetBool("OnAttack", true);
                 JetBottle(target);
                 _timeAttack = 0.0f;
+                if (stateInfo.IsName("Throw") && stateInfo.normalizedTime >= 1)
+                    _animator.SetBool("OnAttack", false);
             }
 
         }
@@ -113,6 +127,8 @@ namespace EnemyIa.Runtime
         [SerializeField] private float _timeAttack;
         [SerializeField] private float _interval;
         [SerializeField] private bool _OnTouched;
+        [SerializeField] private List<AnimatorController> _animatorControllers;
+        [SerializeField] private Animator _animator;
 
 
         private enum Etat
