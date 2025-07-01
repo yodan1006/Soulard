@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,9 +17,12 @@ namespace EnemyIa.Runtime
 
         private void Start()
         {
-            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-            if (playerObject != null)
-                _target = playerObject;
+            if (gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+                if (playerObject != null)
+                    _target = playerObject;
+            }
 
         }
 
@@ -27,6 +31,10 @@ namespace EnemyIa.Runtime
             switch (_etat)
             {
                 case Etat.idle:
+                    if (_OnTouched)
+                    {
+                        _etat = Etat.Attack;
+                    }
                     break;
                 case Etat.Attack:
                     _timeAttack += Time.deltaTime;
@@ -93,6 +101,7 @@ namespace EnemyIa.Runtime
         [SerializeField] private float _jetForce;
         [SerializeField] private float _timeAttack;
         [SerializeField] private float _interval;
+        [SerializeField] private bool _OnTouched;
 
 
         private enum Etat
