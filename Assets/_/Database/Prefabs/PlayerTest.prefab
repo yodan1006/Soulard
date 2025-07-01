@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &656738902702936200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5211376652393376086}
+  m_Layer: 6
+  m_Name: Shooting
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5211376652393376086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656738902702936200}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.125, z: 0.529}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3085087296143592437}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1334330716991382770
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,8 +44,8 @@ GameObject:
   - component: {fileID: 1952007986141673055}
   - component: {fileID: 3403294750395625942}
   - component: {fileID: 7716280657715494547}
-  - component: {fileID: 6214523665713364473}
-  - component: {fileID: 6585109334992979570}
+  - component: {fileID: 1958729751260286323}
+  - component: {fileID: 6800272855178943010}
   - component: {fileID: 6840829732962803375}
   - component: {fileID: 2026003242271213504}
   - component: {fileID: 5981852487453113101}
@@ -41,6 +72,7 @@ Transform:
   m_Children:
   - {fileID: 5166348724230529186}
   - {fileID: 991331031706954929}
+  - {fileID: 5211376652393376086}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5941691510135935034
@@ -108,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1866cdc648f58549a3633a11676bc9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_currentHealth: 0
   _maxHealth: 10
   _healthSlider: {fileID: 0}
   _timerHealth: 3
@@ -116,9 +149,9 @@ MonoBehaviour:
     m_Bits: 65536
   _layerHealth:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   _colliderUltimate: {fileID: 5901915284099361732}
-  _ultimateTimer: 0
+  _ultimateTimer: 1
 --- !u!114 &7716280657715494547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,8 +165,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 5
-  _rotationSpeed: 90
-  _mouseSensitivity: 0.5
+  _mouseSensitivity: 2
+--- !u!114 &1958729751260286323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334330716991382770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79860d30aef5460b9ac812f40a915db4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AmmoPrefab: {fileID: 253945383278620727, guid: d9a006287bae8e94a83b99764c6b4d87, type: 3}
+  PoolSize: 100
+--- !u!114 &6800272855178943010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334330716991382770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7267b68583ce2f4a96d5a2815d209af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spreadAngle: 0
+  missileCount: 20
+  poolMunition: {fileID: 1958729751260286323}
+  shootPoint: {fileID: 5211376652393376086}
+  shootForce: 5
 --- !u!65 &6840829732962803375
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -241,7 +304,7 @@ MonoBehaviour:
     m_ActionName: 'Player/Look[/Mouse/delta]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6214523665713364473}
+      - m_Target: {fileID: 6800272855178943010}
         m_TargetAssemblyTypeName: Shooter.Runtime.Shoot, Shooter.Runtime
         m_MethodName: Tir
         m_Mode: 0
@@ -256,7 +319,19 @@ MonoBehaviour:
     m_ActionId: 6c2ab1b8-8984-453a-af3d-a3c78ae1679a
     m_ActionName: 'Player/Attack[/Mouse/leftButton,/Keyboard/enter]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3403294750395625942}
+        m_TargetAssemblyTypeName: Movement.Runtime.PlayerStat, Movement.Runtime
+        m_MethodName: PickUpBottle
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
     m_ActionName: 'Player/Interact[/Keyboard/e]'
   - m_PersistentCalls:
@@ -492,7 +567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6347169216323322074, guid: 37d622a9874f0454ba3445281f0f06ca, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.44
       objectReference: {fileID: 0}
     - target: {fileID: 6347169216323322074, guid: 37d622a9874f0454ba3445281f0f06ca, type: 3}
       propertyPath: m_LocalPosition.z

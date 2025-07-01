@@ -11,6 +11,7 @@ namespace Movement.Runtime
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
+            Cursor.visible = false;
         }
 
         void Start()
@@ -23,7 +24,7 @@ namespace Movement.Runtime
         {
             Vector3 movementVector = transform.TransformDirection(new Vector3(_move.x, 0, _move.y));
             _rigidbody.linearVelocity = movementVector * _moveSpeed ;
-            float rotate = _rotation.x * _rotationSpeed * _mouseSensitivity * Time.deltaTime;
+            float rotate = _rotation.x * _mouseSensitivity * Time.deltaTime;
             transform.Rotate(0,rotate,0);
         }
 
@@ -50,7 +51,6 @@ namespace Movement.Runtime
         #region Private And Protected
         
         [SerializeField] private float _moveSpeed = 5f;
-        [SerializeField] private float _rotationSpeed = 90f;
         [SerializeField] private float _mouseSensitivity = 1.0f;
 
         private Vector2 _move;
