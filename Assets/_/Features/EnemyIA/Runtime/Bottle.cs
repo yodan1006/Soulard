@@ -7,6 +7,12 @@ namespace EnemyIa.Runtime
     public class Bottle : MonoBehaviour
     {
         public GameObject launcher;
+        private Vector3 _moveDirection;
+
+        public void InitDirection(Vector3 moveDirection)
+        {
+            _moveDirection = moveDirection.normalized;
+        }
 
         private void Update()
         {
@@ -15,7 +21,8 @@ namespace EnemyIa.Runtime
 
         private void RotationObject()
         {
-            Quaternion.Euler(0,0,180 * Time.deltaTime);
+            _moveDirection.z -= 90f;
+            transform.Rotate(_moveDirection, 720f * Time.deltaTime);
         }
 
         private void OnTriggerEnter(Collider other)

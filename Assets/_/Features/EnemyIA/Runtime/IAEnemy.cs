@@ -38,11 +38,7 @@ namespace EnemyIa.Runtime
                     break;
                 case Etat.Attack:
                     _timeAttack += Time.deltaTime;
-                    if (_timeAttack >= _interval)
-                    {
-                        Attack(_target);
-                        _timeAttack = 0.0f;
-                    }
+                    Attack(_target);
                     break;
             }
         }
@@ -52,21 +48,27 @@ namespace EnemyIa.Runtime
             _agent.SetDestination(target.transform.position);
             if (Vector3.Distance(_agent.transform.position, target.transform.position) < _distanceForMelee)
                 Melee();
-            else
+            else if (_timeAttack >= _interval)
+            {
                 JetBottle(target);
+                _timeAttack = 0.0f;
+            }
+
         }
 
         private void JetBottle(GameObject target)
         {
             GameObject bottle = Instantiate(_bottlePrefab, transform.position, Quaternion.identity);
             Rigidbody rb = bottle.GetComponent<Rigidbody>();
+            
+            Vector3 dir = (target.transform.position - transform.position).normalized;
 
             Bottle bottleScript = bottle.GetComponent<Bottle>();
             bottleScript.launcher = gameObject;
+            bottleScript.InitDirection(dir);
             if (rb != null)
             {
-                Vector3 direction = (target.transform.position - transform.position).normalized;
-                rb.AddForce(direction * _jetForce, ForceMode.Impulse);
+                rb.AddForce(dir * _jetForce, ForceMode.Impulse);
             }
         }
 
