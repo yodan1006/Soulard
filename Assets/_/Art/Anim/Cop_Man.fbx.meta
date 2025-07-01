@@ -17,31 +17,34 @@ ModelImporter:
     removeConstantScaleCurves: 0
     motionNodeName: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'Idle' has import animation warnings that might
+    animationImportWarnings: "\nClip 'Spawn' has import animation warnings that might
       lower retargeting quality:\nNote: Activate translation DOF on avatar to improve
-      retargeting quality.\n\t'DEF_Head' has translation animation that will be discarded.\n\nClip
-      'Throw' has import animation warnings that might lower retargeting quality:\nNote:
-      Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF_Head'
-      has translation animation that will be discarded.\n\t'DEF_ToeBase.L' has translation
-      animation that will be discarded.\n\nClip 'Aggressive_Walk' has import animation
-      warnings that might lower retargeting quality:\nNote: Activate translation
-      DOF on avatar to improve retargeting quality.\n\t'DEF_Head' has translation
-      animation that will be discarded.\n\t'DEF_Shoulder.L' has translation animation
-      that will be discarded.\n\t'DEF_Shoulder.R' has translation animation that
-      will be discarded.\n\t'DEF_ToeBase.L' has translation animation that will be
-      discarded.\n\t'DEF_ToeBase.R' has translation animation that will be discarded.\n\nClip
-      'Spawn' has import animation warnings that might lower retargeting quality:\nNote:
-      Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF_Spine'
-      has translation animation that will be discarded.\n\t'DEF_Head' has translation
+      retargeting quality.\n\t'DEF_Spine' has translation animation that will be
+      discarded.\n\t'DEF_Head' has translation animation that will be discarded.\n\t'DEF_ToeBase.L'
+      has translation animation that will be discarded.\n\t'DEF_ToeBase.R' has translation
+      animation that will be discarded.\n\nClip 'Puke' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'DEF_Head' has translation animation that
+      will be discarded.\n\t'DEF_Shoulder.L' has translation animation that will
+      be discarded.\n\t'DEF_Shoulder.R' has translation animation that will be discarded.\n\t'DEF_ToeBase.L'
+      has translation animation that will be discarded.\n\t'DEF_ToeBase.R' has translation
+      animation that will be discarded.\n\nClip 'Idle' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'DEF_Head' has translation animation that
+      will be discarded.\n\nClip 'Aggressive_Walk' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'DEF_Head' has translation animation that
+      will be discarded.\n\t'DEF_Shoulder.L' has translation animation that will
+      be discarded.\n\t'DEF_HandThumb1.L' has translation animation that will be
+      discarded.\n\t'DEF_HandIndex1.L' has translation animation that will be discarded.\n\t'DEF_Shoulder.R'
+      has translation animation that will be discarded.\n\t'DEF_HandThumb1.R' has
+      translation animation that will be discarded.\n\t'DEF_HandIndex1.R' has translation
       animation that will be discarded.\n\t'DEF_ToeBase.L' has translation animation
       that will be discarded.\n\t'DEF_ToeBase.R' has translation animation that will
-      be discarded.\n\nClip 'Puke' has import animation warnings that might lower
+      be discarded.\n\nClip 'Throw' has import animation warnings that might lower
       retargeting quality:\nNote: Activate translation DOF on avatar to improve retargeting
-      quality.\n\t'DEF_Head' has translation animation that will be discarded.\n\t'DEF_Shoulder.L'
-      has translation animation that will be discarded.\n\t'DEF_Shoulder.R' has translation
-      animation that will be discarded.\n\t'DEF_ToeBase.L' has translation animation
-      that will be discarded.\n\t'DEF_ToeBase.R' has translation animation that will
-      be discarded.\n"
+      quality.\n\t'DEF_Head' has translation animation that will be discarded.\n\t'DEF_ToeBase.L'
+      has translation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -124,7 +127,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
