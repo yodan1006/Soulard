@@ -123,7 +123,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -149,11 +149,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent: {fileID: 128785440624534881}
   _etat: 1
+  _typeIa: 1
   _distanceForMelee: 0
   _bottlePrefab: {fileID: 5698033825655526461, guid: 8b2093cb204b2a84998c22b842bdf89e, type: 3}
   _jetForce: 10
   _timeAttack: 0
   _interval: 1
+  _OnTouched: 0
 --- !u!114 &8607052146992286993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,3 +169,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeDispawn: 0.5
+  _poolEnemy: {fileID: 0}
