@@ -40,11 +40,17 @@ namespace Movement.Runtime
                 Damage();
             }
 
-            if (other.gameObject.layer == _layerHealth.value)
-            {
-                if (_currentHealth < _maxHealth)
+
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Reload"))
+            {   
+                _timerHealth -= Time.deltaTime;
+                if (_currentHealth < _maxHealth && _timerHealth >= _timerHealth)
                 {
-                   Health();
+                    Health();
                 }
             }
         }
@@ -104,6 +110,9 @@ namespace Movement.Runtime
         [SerializeField] private int _maxHealth = 10;
         [SerializeField] private Slider _healthSlider;
         
+        [Header("Time Health")]
+        [SerializeField] private float _timerHealth = 3f;
+        
         [Header("Layer Damage")]
         [SerializeField] private LayerMask _layerMask;
         
@@ -115,6 +124,7 @@ namespace Movement.Runtime
         
         private int _currentHealth;
         private bool _ultimate;
+        
 
         #endregion
     }
