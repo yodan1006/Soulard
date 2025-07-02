@@ -35,7 +35,13 @@ namespace EnemyIa.Runtime
             switch (_etat)
             {
                 case Etat.spawn:
-                    
+                    AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+                    _animator.SetBool("Spawn", true);
+                    if (stateInfo.IsName("Spawn") && stateInfo.normalizedTime >= 0.6f)
+                    {
+                        _animator.SetBool("Spawn", false);
+                        _etat = Etat.Attack;
+                    }
                     break;
                 case Etat.idle:
                     if (_typeIa == TypeIA.civil)
