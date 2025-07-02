@@ -19,6 +19,11 @@ namespace EnemyIa.Runtime
 
         private void Start()
         {
+            // Il est recommandé de définir une distance d'arrêt.
+            // L'agent s'arrêtera à 1.5 unité de distance de sa cible.
+            // Ajustez cette valeur en fonction de la taille de votre agent et de vos besoins.
+            _agent.stoppingDistance = 3f; 
+            
             int random = UnityEngine.Random.Range(0, _animatorControllers.Count);
             _animator.runtimeAnimatorController = _animatorControllers[random];
             
@@ -28,7 +33,6 @@ namespace EnemyIa.Runtime
                 if (playerObject != null)
                     _target = playerObject;
             }
-            
         }
 
         private void Update()
@@ -53,11 +57,25 @@ namespace EnemyIa.Runtime
                     break;
                 case Etat.Attack:
                     armature.GetComponent<SkinnedMeshRenderer>().material = _colorAttack;
-                    _agent.SetDestination(_target.transform.position);
-                    transform.LookAt(_target.transform);
-                    _timeAttack += Time.deltaTime;
-                    _animator.SetBool("OnMove", true);
-                    Attack(_target);
+                    _agent.SetDestination(_target.transform.position); // On définit la destination
+                    
+                    // On vérifie si l'agent est arrivé à destination (en tenant compte de la stoppingDistance)
+                    if (_agent.remainingDistance <= _agent.stoppingDistance)
+                    {
+                        // Si l'agent est assez proche, il s'arrête de bouger et attaque
+                        _animator.SetBool("OnMove", false);
+                        transform.LookAt(_target.transform);
+                        _timeAttack += Time.deltaTime;
+                        Attack(_target);
+                    }
+                    else
+                    {
+                        // Sinon, il continue de bouger
+                        _animator.SetBool("OnMove", true);
+                        _timeAttack += Time.deltaTime;
+                        Attack(_target);
+                        transform.LookAt(_target.transform);
+                    }
                     break;
                 case Etat.vaumito:
                     armature.GetComponent<SkinnedMeshRenderer>().material = _colorVaumito;
