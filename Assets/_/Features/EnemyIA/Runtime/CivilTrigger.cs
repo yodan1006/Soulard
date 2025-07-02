@@ -63,6 +63,7 @@ namespace EnemyIa.Runtime
         private IAEnemy _iaEnemy;
         private PlayerMove _playerMove;
 
+        
         #endregion
     }
 }
