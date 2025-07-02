@@ -1,0 +1,16 @@
+{
+    "name": "ZoneSpawn.Runtime",
+    "rootNamespace": "ZoneSpawn.Runtime",
+    "references": [
+        "GUID:374e680769891be4c8c92cc8b37dc44f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

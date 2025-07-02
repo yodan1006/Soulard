@@ -1,4 +1,3 @@
-using System;
 using Life.Runtime;
 using UnityEngine;
 using UnityEngine.InputSystem;

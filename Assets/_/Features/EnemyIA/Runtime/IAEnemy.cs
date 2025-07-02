@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using UnityEditor.Animations;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,10 +15,7 @@ namespace EnemyIa.Runtime
 
 
         #region Unity Api
-
-        private void Awake()
-        {
-        }
+        
 
         private void Start()
         {
