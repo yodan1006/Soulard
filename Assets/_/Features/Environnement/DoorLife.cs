@@ -17,8 +17,9 @@ namespace Environment.Runtime
             Death();
         }
 
-        private void OnCollisionEnter(Collision other)
+        private void OnTriggerEnter(Collider other)
         {
+            if (Time.timeScale == 0) return;
             if (other.gameObject.layer == LayerMask.NameToLayer("BulletPlayer"))
             {
                 _doorLife--;

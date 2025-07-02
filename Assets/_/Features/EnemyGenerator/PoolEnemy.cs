@@ -7,8 +7,8 @@ namespace EnemyGenerator.Runtime
     {
         #region Publics
 
-        [Header("Prefabs for Slime")] 
-        public List<GameObject> m_prefabSlime;
+        [Header("Prefabs Enemy")] 
+        public List<GameObject> m_prefabenemy;
 
         #endregion
 
@@ -21,7 +21,7 @@ namespace EnemyGenerator.Runtime
 
             for (int i = 0; i < _numberOfEnemy; i++)
             {
-                foreach (var prefab in m_prefabSlime)
+                foreach (var prefab in m_prefabenemy)
                 {
                     GameObject obj = Instantiate(prefab, transform);
                     obj.SetActive(false);
@@ -42,6 +42,7 @@ namespace EnemyGenerator.Runtime
 
         public void ReturnObject(GameObject obj)
         {
+            if (Time.timeScale == 0) return;
             obj.SetActive(false);
         }
 
@@ -67,7 +68,7 @@ namespace EnemyGenerator.Runtime
             }
 
             // Sinon, créer un nouvel ennemi, l'activer et l'ajouter à la pool
-            GameObject NewObj = Instantiate(m_prefabSlime[Random.Range(0, m_prefabSlime.Count)]);
+            GameObject NewObj = Instantiate(m_prefabenemy[Random.Range(0, m_prefabenemy.Count)]);
             NewObj.SetActive(true);
             _poolEnemy.Add(NewObj);
             return NewObj;

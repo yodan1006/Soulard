@@ -40,6 +40,7 @@ namespace Life.Runtime
 
         private void Reload()
         {
+            if (Time.timeScale == 0) return;
             if (_timeReloadTimer >= _timeReload)
             {
                 _timeReloadTimer = 0;

@@ -22,6 +22,7 @@ namespace EnemyIa.Runtime
 
         void OnTriggerEnter(Collider other)
         {
+            if (Time.timeScale == 0) return;
             _heath--;
             if (other.gameObject.layer == LayerMask.NameToLayer("BulletEnemy"))
             {

@@ -62,7 +62,7 @@ namespace ZoneSpawn.Runtime
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+            if (other.gameObject.layer == LayerMask.NameToLayer("Player") && !_isDoorOpening)
             {
                _spawneurPrincipal.SetActive(true); 
             }
