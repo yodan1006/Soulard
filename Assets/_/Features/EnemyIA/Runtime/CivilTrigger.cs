@@ -9,7 +9,7 @@ namespace EnemyIa.Runtime
         
         void Start()
         {
-            _iaEnemy = GetComponent<IAEnemy>();
+            scriptEnemy = GetComponent<IAEnemy>();
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
             if (playerObj != null)
                 _playerMove = playerObj.GetComponent<PlayerMove>();
@@ -28,7 +28,7 @@ namespace EnemyIa.Runtime
                 Bottle bottle = other.GetComponent<Bottle>();
                 if (bottle != null && bottle.m_launcher != null)
                 {
-                    _iaEnemy.SetTarget(bottle.m_launcher);
+                    scriptEnemy.SetTarget(bottle.m_launcher);
                     //Debug.Log(bottle.m_launcher.name);
                     other.gameObject.SetActive(false);
                     return;
@@ -37,7 +37,7 @@ namespace EnemyIa.Runtime
 
             if (other.gameObject.layer == LayerMask.NameToLayer("BulletPlayer"))
             {
-                _iaEnemy.SetTarget(_playerMove.gameObject);
+                scriptEnemy.SetTarget(_playerMove.gameObject);
                 other.gameObject.SetActive(false);
             }
             
@@ -50,7 +50,18 @@ namespace EnemyIa.Runtime
 
         private void Death()
         {
-            if (_heath <= 0) gameObject.SetActive(false);
+            if (_heath <= 0)
+            {
+                gameObject.GetComponent<Collider>().enabled = false;
+                scriptEnemy._animator.SetBool("Vaumito",true);
+                _timeDispawn -= Time.deltaTime;
+                scriptEnemy._agent.isStopped = true;
+                scriptEnemy._etat = IAEnemy.Etat.vaumito;
+                if (_timeDispawn <= 0)
+                {
+                    Destroy(gameObject);
+                }
+            }
         }
         
         #endregion
@@ -60,10 +71,11 @@ namespace EnemyIa.Runtime
 
         [SerializeField] private int _heath = 5;
 
-        private IAEnemy _iaEnemy;
+        private IAEnemy scriptEnemy;
         private PlayerMove _playerMove;
+        // [SerializeField] private  IAEnemy scriptEnemy;
+        [SerializeField] private float _timeDispawn;
 
-        
         #endregion
     }
 }

@@ -57,6 +57,8 @@ namespace EnemyIa.Runtime
                     _animator.SetBool("OnMove", true);
                     Attack(_target);
                     break;
+                case Etat.vaumito:
+                    break;
             }
         }
 
@@ -132,29 +134,29 @@ namespace EnemyIa.Runtime
         
         #region Privates
         
-        [SerializeField] private NavMeshAgent _agent;
-        [SerializeField] private Etat _etat;
+        [SerializeField] public NavMeshAgent _agent;
+        public Etat _etat; 
         [SerializeField] private TypeIA _typeIa;
         private bool _OnAttack;
         private GameObject _target;
-        [SerializeField] private float _distanceForMelee;
         [SerializeField] private GameObject _bottlePrefab;
         [SerializeField] private float _jetForce;
         [SerializeField] private float _timeAttack;
         [SerializeField] private float _interval;
         [SerializeField] private bool _OnTouched;
         [SerializeField] private List<AnimatorController> _animatorControllers;
-        [SerializeField] private Animator _animator;
+        [SerializeField] public Animator _animator;
         [SerializeField] private Transform _shootPoint;
         [SerializeField] private float _tumbleForce = 10f; 
 
 
 
-        private enum Etat
+        public enum Etat
         {
             idle,
             Attack,
-            spawn
+            spawn,
+            vaumito
         }
         #endregion
 
