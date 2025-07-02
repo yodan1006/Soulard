@@ -56,7 +56,7 @@ namespace Movement.Runtime
             if (zone != null)
             {   
                 _zone = zone;
-                _zoneLife = true;
+                // _zoneLife = true;
             }
         }
 
@@ -66,7 +66,7 @@ namespace Movement.Runtime
             if (zone != null && zone == _zone)
             {
                 _zone = null;
-                _zoneLife = false;
+                // _zoneLife = false;
             }
         }
 
@@ -138,7 +138,7 @@ namespace Movement.Runtime
         [SerializeField] private Slider _healthSlider;
         
         [Header("Time Health")]
-        [SerializeField] private float _timerHealth = 3f;
+        // [SerializeField] private float _timerHealth = 3f;
         
         [Header("Layer Damage")]
         [SerializeField] private LayerMask _layerMask;
@@ -146,7 +146,7 @@ namespace Movement.Runtime
         [Header("Layer Health")]
         [SerializeField] private LayerMask _layerHealth;
         
-        private bool _zoneLife;
+        // private bool _zoneLife;
         private LifeZone _zone;
         
         [Header("Ultimate")]

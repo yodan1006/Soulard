@@ -3,7 +3,8 @@
     "rootNamespace": "Movement.Runtime",
     "references": [
         "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:b78e0dd8cd147cc4183ccffc3f70bae2"
+        "GUID:b78e0dd8cd147cc4183ccffc3f70bae2",
+        "GUID:c412474e007b3a64eb0fb423dc866bec"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -2,7 +2,8 @@
     "name": "EnemyIa.Runtime",
     "rootNamespace": "EnemyIa.Runtime",
     "references": [
-        "GUID:da7403c101b3ca442880b524774c6f83"
+        "GUID:da7403c101b3ca442880b524774c6f83",
+        "GUID:374e680769891be4c8c92cc8b37dc44f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
