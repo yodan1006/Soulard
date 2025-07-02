@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: 8d93336f8fa5dba46a7d2cc3e8a3ec1d
+guid: 73ef2b9c042900d4a8d1b9f764903813
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
   externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Global_Transparency
-    second: {fileID: 2100000, guid: b4064bf9dad75594b9be78c2ceaccc31, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

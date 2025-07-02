@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Global_emisive
+    second: {fileID: 2100000, guid: 9537f460c43a9a7428e504517140ffa3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Global_texture
     second: {fileID: 2100000, guid: 9bb1efa6da1cfac489178c14739f793a, type: 2}
   materials:
