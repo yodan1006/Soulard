@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 656738902702936200}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.125, z: 0.529}
+  m_LocalPosition: {x: 0, y: 0.45, z: 0.578}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 3403294750395625942}
   - component: {fileID: 7716280657715494547}
   - component: {fileID: 1958729751260286323}
-  - component: {fileID: 6800272855178943010}
+  - component: {fileID: 9093899188728910091}
   - component: {fileID: 6840829732962803375}
   - component: {fileID: 2026003242271213504}
   - component: {fileID: 5981852487453113101}
@@ -143,7 +143,6 @@ MonoBehaviour:
   m_currentHealth: 0
   _maxHealth: 10
   _healthSlider: {fileID: 0}
-  _timerHealth: 3
   _layerMask:
     serializedVersion: 2
     m_Bits: 65536
@@ -179,8 +178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AmmoPrefab: {fileID: 253945383278620727, guid: d9a006287bae8e94a83b99764c6b4d87, type: 3}
-  PoolSize: 100
---- !u!114 &6800272855178943010
+  PoolSize: 30
+--- !u!114 &9093899188728910091
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,11 +188,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1334330716991382770}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7267b68583ce2f4a96d5a2815d209af, type: 3}
+  m_Script: {fileID: 11500000, guid: 46d69e5f71898014cb2cc30699255db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spreadAngle: 0
-  missileCount: 20
+  spreadAngle: 45
+  _lifeModification: 0600000009000000
   poolMunition: {fileID: 1958729751260286323}
   shootPoint: {fileID: 5211376652393376086}
   shootForce: 5
@@ -304,8 +303,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Look[/Mouse/delta]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6800272855178943010}
-        m_TargetAssemblyTypeName: Shooter.Runtime.Shoot, Shooter.Runtime
+      - m_Target: {fileID: 9093899188728910091}
+        m_TargetAssemblyTypeName: Movement.Runtime.ShootPlayer, Movement.Runtime
         m_MethodName: Tir
         m_Mode: 0
         m_Arguments:
@@ -410,6 +409,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3783beda-6296-4011-81b5-23120d92fc25
     m_ActionName: 'Player/Ultimate[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: ManagerScene.Runtime.PauseMenu, ManagerScene.Runtime
+        m_MethodName: Pause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8b745bf7-033d-4cbe-acf0-82d0eccfcb25
+    m_ActionName: 'Player/Pause[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
