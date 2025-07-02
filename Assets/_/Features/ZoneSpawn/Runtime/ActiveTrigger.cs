@@ -20,8 +20,10 @@ namespace ZoneSpawn.Runtime
             {
                 _isDoorOpening = true;
                 StartCoroutine(OpenDoorCoroutine());
+                _spawneurPrincipal.SetActive(false);
+                _spawneurSecondaire.SetActive(false);
             }
-            if (_vieDuPlayer.m_currentHealth >= _vieActiveSecondSpawn)
+            if (_vieDuPlayer.m_currentHealth >= _vieActiveSecondSpawn && !_isDoorOpening)
             {
                 ActiveSecondSpawn();
             }
