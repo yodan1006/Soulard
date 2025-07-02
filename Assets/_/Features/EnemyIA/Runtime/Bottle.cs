@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bottle : MonoBehaviour
 {
     private Rigidbody rb;
+    public GameObject m_launcher;
 
     void Awake()
     {
@@ -29,5 +30,10 @@ public class Bottle : MonoBehaviour
         // On applique une impulsion de rotation unique autour de cet axe.
         // ForceMode.Impulse applique la force instantanément, comme un "coup" de poignet au lancer.
         rb.AddTorque(-rotationAxis.normalized * tumbleForce, ForceMode.Impulse);
+    }
+
+    public void SetLauncher(GameObject launcherGameObject)
+    {
+        m_launcher = launcherGameObject;
     }
 }

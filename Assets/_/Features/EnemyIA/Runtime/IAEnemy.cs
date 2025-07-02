@@ -33,6 +33,7 @@ namespace EnemyIa.Runtime
                 if (playerObject != null)
                     _target = playerObject;
             }
+            
         }
 
         private void Update()
@@ -84,6 +85,7 @@ namespace EnemyIa.Runtime
             
             Vector3 dir = (target.transform.position - transform.position).normalized;
             Bottle bottleScript = bottle.GetComponent<Bottle>();
+            bottleScript.SetLauncher(gameObject);
             bottleScript.InitializeTumble(dir, _tumbleForce);
 
             //bottleScript.launcher = gameObject;
@@ -109,13 +111,13 @@ namespace EnemyIa.Runtime
             }
         }
 
-        // public void SetTarget(GameObject newTarget)
-        // {
-        //     if (_typeIa == TypeIA.enemy || _etat == Etat.Attack) return;
-        //     _target = newTarget;
-        //     _etat = Etat.Attack;
-        //     _OnTouched = true;
-        // }
+         public void SetTarget(GameObject newTarget)
+         {
+            if (_typeIa == TypeIA.enemy || _etat == Etat.Attack) return;
+             _target = newTarget;
+            _etat = Etat.Attack;
+             _OnTouched = true;
+         }
 
         #endregion
 

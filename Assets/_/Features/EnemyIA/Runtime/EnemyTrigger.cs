@@ -34,6 +34,7 @@ namespace EnemyIa.Runtime
                     _poolEnemy.ReturnObject(gameObject);
                 }
             }
+            Death();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -42,6 +43,7 @@ namespace EnemyIa.Runtime
             {
                 //animator.SetBool()
                 _OnAnimeTouchPlay = true;
+                _heath--;
                 Debug.Log("il m'a toucher");
             }
         }
@@ -58,7 +60,10 @@ namespace EnemyIa.Runtime
 
         #region Main Methode
 
-        
+        private void Death()
+        {
+            if (_heath <= 0 ) gameObject.SetActive(false);
+        }
 
         #endregion
         
@@ -69,6 +74,8 @@ namespace EnemyIa.Runtime
         [SerializeField] private float _timeDispawn;
         private bool _OnAnimeTouchPlay;
         [SerializeField]private PoolEnemy _poolEnemy;
+        
+        [SerializeField] private int _heath = 5;
 
         #endregion
     }

@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba19d5cac0852ab4fb9f37dde9f6a845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launcher: {fileID: 0}
+  m_launcher: {fileID: 0}
 --- !u!54 &9040557868326903795
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -141,6 +141,10 @@ PrefabInstance:
     - target: {fileID: 2765624904506054919, guid: ba81a571dfedde8439e912c0b0ce91b4, type: 3}
       propertyPath: m_Name
       value: B01_bouteille_1_a
+      objectReference: {fileID: 0}
+    - target: {fileID: 2765624904506054919, guid: ba81a571dfedde8439e912c0b0ce91b4, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3254600176894919613, guid: ba81a571dfedde8439e912c0b0ce91b4, type: 3}
       propertyPath: m_LocalPosition.x
