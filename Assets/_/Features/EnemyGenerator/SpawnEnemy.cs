@@ -9,6 +9,7 @@ namespace EnemyGenerator.Runtime
         #region Publics
 
         [SerializeField] public float m_interval;
+        public int m_countSpawn;
 
         #endregion
 
@@ -54,7 +55,7 @@ namespace EnemyGenerator.Runtime
                 {
                     Vector3 pos = GetRandomPos();
                     enemy.transform.position = pos;
-                    //ConfigureEnemy(slime);
+                    m_countSpawn++;
                 }
             }
         }

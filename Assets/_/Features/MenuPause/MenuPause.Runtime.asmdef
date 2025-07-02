@@ -1,9 +1,8 @@
 {
-    "name": "ZoneSpawn.Runtime",
-    "rootNamespace": "ZoneSpawn.Runtime",
+    "name": "MenuPause.Runtime",
+    "rootNamespace": "MenuPause.Runtime",
     "references": [
-        "GUID:374e680769891be4c8c92cc8b37dc44f",
-        "GUID:da7403c101b3ca442880b524774c6f83"
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
