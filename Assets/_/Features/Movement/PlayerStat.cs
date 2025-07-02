@@ -135,7 +135,13 @@ namespace Movement.Runtime
 
         private void Death()
         {
-            if (_currentHealth <= 0) gameObject.SetActive(false);
+            if (_currentHealth <= 0)
+            {
+                gameObject.SetActive(false);
+                PlayerInput playerInput = GetComponent<PlayerInput>();
+                playerInput.enabled = false;
+                _gameOver.gameObject.SetActive(true);
+            }
         }
         
         #endregion
@@ -161,6 +167,7 @@ namespace Movement.Runtime
         [Header("Ultimate")]
         [SerializeField] private Collider _colliderUltimate;
         [SerializeField] private float _ultimateTimer;
+        [SerializeField] private Canvas _gameOver;
 
         
         private int _currentHealth;

@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 656738902702936200}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.472, z: 0.529}
+  m_LocalPosition: {x: 0, y: 0.45, z: 0.578}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 3403294750395625942}
   - component: {fileID: 7716280657715494547}
   - component: {fileID: 1958729751260286323}
-  - component: {fileID: 6800272855178943010}
+  - component: {fileID: 9093899188728910091}
   - component: {fileID: 6840829732962803375}
   - component: {fileID: 2026003242271213504}
   - component: {fileID: 5981852487453113101}
@@ -178,9 +178,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79860d30aef5460b9ac812f40a915db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AmmoPrefab: {fileID: 3498758898915887190, guid: 42866922c1ad1254d91e91b06f8c921a, type: 3}
-  PoolSize: 100
---- !u!114 &6800272855178943010
+  AmmoPrefab: {fileID: 253945383278620727, guid: d9a006287bae8e94a83b99764c6b4d87, type: 3}
+  PoolSize: 30
+--- !u!114 &9093899188728910091
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1334330716991382770}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7267b68583ce2f4a96d5a2815d209af, type: 3}
+  m_Script: {fileID: 11500000, guid: 46d69e5f71898014cb2cc30699255db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spreadAngle: 30
@@ -307,8 +307,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Look[/Mouse/delta]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6800272855178943010}
-        m_TargetAssemblyTypeName: Shooter.Runtime.Shoot, Shooter.Runtime
+      - m_Target: {fileID: 9093899188728910091}
+        m_TargetAssemblyTypeName: Movement.Runtime.ShootPlayer, Movement.Runtime
         m_MethodName: Tir
         m_Mode: 0
         m_Arguments:
