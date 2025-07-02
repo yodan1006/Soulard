@@ -19,6 +19,7 @@ namespace EnemyIa.Runtime
 
         private void Start()
         {
+            scriptEnemy = GetComponent<IAEnemy>();
             _poolEnemy = FindFirstObjectByType<PoolEnemy>();
             _timeOrigin = _timeDispawn;
         }
@@ -27,8 +28,12 @@ namespace EnemyIa.Runtime
         {
             if (_OnAnimeTouchPlay)
             {
+                gameObject.GetComponent<Collider>().enabled = false;
+                scriptEnemy._animator.SetBool("Vaumito",true);
                 _timeDispawn -= Time.deltaTime;
-                if (_timeDispawn >= 0)
+                scriptEnemy._agent.isStopped = true;
+                scriptEnemy._etat = IAEnemy.Etat.vaumito;
+                if (_timeDispawn <= 0)
                 {
                     gameObject.SetActive(false);
                     _poolEnemy.ReturnObject(gameObject);
@@ -42,6 +47,7 @@ namespace EnemyIa.Runtime
             {
                 //animator.SetBool()
                 _OnAnimeTouchPlay = true;
+                _heath--;
                 Debug.Log("il m'a toucher");
             }
         }
@@ -57,7 +63,7 @@ namespace EnemyIa.Runtime
 
 
         #region Main Methode
-
+        
         
 
         #endregion
@@ -69,6 +75,8 @@ namespace EnemyIa.Runtime
         [SerializeField] private float _timeDispawn;
         private bool _OnAnimeTouchPlay;
         [SerializeField]private PoolEnemy _poolEnemy;
+        [SerializeField] private int _heath = 5;
+        private IAEnemy scriptEnemy;
 
         #endregion
     }

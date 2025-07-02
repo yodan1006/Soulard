@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using UnityEditor.Animations;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,10 +15,7 @@ namespace EnemyIa.Runtime
 
 
         #region Unity Api
-
-        private void Awake()
-        {
-        }
+        
 
         private void Start()
         {
@@ -33,6 +28,7 @@ namespace EnemyIa.Runtime
                 if (playerObject != null)
                     _target = playerObject;
             }
+            
         }
 
         private void Update()
@@ -40,7 +36,13 @@ namespace EnemyIa.Runtime
             switch (_etat)
             {
                 case Etat.spawn:
-                    
+                    AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+                    _animator.SetBool("Spawn", true);
+                    if (stateInfo.IsName("Spawn") && stateInfo.normalizedTime >= 0.6f)
+                    {
+                        _animator.SetBool("Spawn", false);
+                        _etat = Etat.Attack;
+                    }
                     break;
                 case Etat.idle:
                     if (_typeIa == TypeIA.civil)
@@ -54,6 +56,8 @@ namespace EnemyIa.Runtime
                     _timeAttack += Time.deltaTime;
                     _animator.SetBool("OnMove", true);
                     Attack(_target);
+                    break;
+                case Etat.vaumito:
                     break;
             }
         }
@@ -84,6 +88,7 @@ namespace EnemyIa.Runtime
             
             Vector3 dir = (target.transform.position - transform.position).normalized;
             Bottle bottleScript = bottle.GetComponent<Bottle>();
+            bottleScript.SetLauncher(gameObject);
             bottleScript.InitializeTumble(dir, _tumbleForce);
 
             //bottleScript.launcher = gameObject;
@@ -109,13 +114,13 @@ namespace EnemyIa.Runtime
             }
         }
 
-        // public void SetTarget(GameObject newTarget)
-        // {
-        //     if (_typeIa == TypeIA.enemy || _etat == Etat.Attack) return;
-        //     _target = newTarget;
-        //     _etat = Etat.Attack;
-        //     _OnTouched = true;
-        // }
+         public void SetTarget(GameObject newTarget)
+         {
+            if (_typeIa == TypeIA.enemy || _etat == Etat.Attack) return;
+             _target = newTarget;
+            _etat = Etat.Attack;
+             _OnTouched = true;
+         }
 
         #endregion
 
@@ -129,29 +134,29 @@ namespace EnemyIa.Runtime
         
         #region Privates
         
-        [SerializeField] private NavMeshAgent _agent;
-        [SerializeField] private Etat _etat;
+        [SerializeField] public NavMeshAgent _agent;
+        public Etat _etat; 
         [SerializeField] private TypeIA _typeIa;
         private bool _OnAttack;
         private GameObject _target;
-        [SerializeField] private float _distanceForMelee;
         [SerializeField] private GameObject _bottlePrefab;
         [SerializeField] private float _jetForce;
         [SerializeField] private float _timeAttack;
         [SerializeField] private float _interval;
         [SerializeField] private bool _OnTouched;
         [SerializeField] private List<AnimatorController> _animatorControllers;
-        [SerializeField] private Animator _animator;
+        [SerializeField] public Animator _animator;
         [SerializeField] private Transform _shootPoint;
         [SerializeField] private float _tumbleForce = 10f; 
 
 
 
-        private enum Etat
+        public enum Etat
         {
             idle,
             Attack,
-            spawn
+            spawn,
+            vaumito
         }
         #endregion
 

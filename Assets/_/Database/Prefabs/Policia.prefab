@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 2587016137566604268}
-  _etat: 1
+  _etat: 2
   _typeIa: 1
   _distanceForMelee: 0
   _bottlePrefab: {fileID: 4259184772071405148, guid: 2762610f158e40648b59d4ca91d9cba0, type: 3}
