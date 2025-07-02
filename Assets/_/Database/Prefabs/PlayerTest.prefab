@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 656738902702936200}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.125, z: 0.529}
+  m_LocalPosition: {x: 0, y: 0.472, z: 0.529}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -143,7 +143,6 @@ MonoBehaviour:
   m_currentHealth: 0
   _maxHealth: 10
   _healthSlider: {fileID: 0}
-  _timerHealth: 3
   _layerMask:
     serializedVersion: 2
     m_Bits: 65536
@@ -165,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 5
-  _mouseSensitivity: 2
+  _mouseSensitivity: 6.73
 --- !u!114 &1958729751260286323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79860d30aef5460b9ac812f40a915db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AmmoPrefab: {fileID: 253945383278620727, guid: d9a006287bae8e94a83b99764c6b4d87, type: 3}
+  AmmoPrefab: {fileID: 3498758898915887190, guid: 42866922c1ad1254d91e91b06f8c921a, type: 3}
   PoolSize: 100
 --- !u!114 &6800272855178943010
 MonoBehaviour:
@@ -192,11 +191,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7267b68583ce2f4a96d5a2815d209af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spreadAngle: 0
-  missileCount: 20
+  spreadAngle: 30
+  missileCount: 3
   poolMunition: {fileID: 1958729751260286323}
   shootPoint: {fileID: 5211376652393376086}
-  shootForce: 5
+  shootForce: 10
+  bonus1: 0
+  bonus2: 0
+  health: {fileID: 0}
 --- !u!65 &6840829732962803375
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -340,18 +342,6 @@ MonoBehaviour:
     m_ActionName: 'Player/Crouch[/Keyboard/c]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: f1ba0d36-48eb-4cd5-b651-1c94a6531f70
-    m_ActionName: 'Player/Jump[/Keyboard/space]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 2776c80d-3c14-4091-8c56-d04ced07a2b0
-    m_ActionName: 'Player/Previous[/Keyboard/1]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba
-    m_ActionName: 'Player/Next[/Keyboard/2]'
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 641cd816-40e6-41b4-8c3d-04687c349290
     m_ActionName: 'Player/Sprint[/Keyboard/leftShift]'
   - m_PersistentCalls:
@@ -410,6 +400,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3783beda-6296-4011-81b5-23120d92fc25
     m_ActionName: 'Player/Ultimate[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2964fcbc-5944-4b85-b663-f49035d332b6
+    m_ActionName: 'Player/PauseMenu[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

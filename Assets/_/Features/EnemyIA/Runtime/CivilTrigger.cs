@@ -29,7 +29,7 @@ namespace EnemyIa.Runtime
                 if (bottle != null && bottle.m_launcher != null)
                 {
                     _iaEnemy.SetTarget(bottle.m_launcher);
-                    Debug.Log(bottle.m_launcher.name);
+                    //Debug.Log(bottle.m_launcher.name);
                     other.gameObject.SetActive(false);
                     return;
                 }

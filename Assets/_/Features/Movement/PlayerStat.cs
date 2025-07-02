@@ -94,6 +94,10 @@ namespace Movement.Runtime
             }
         }
 
+        private void AmmoShootNumber()
+        {
+            
+        }
         #endregion
         
         
