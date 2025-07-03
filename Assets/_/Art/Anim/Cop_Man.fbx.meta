@@ -204,7 +204,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.38857308
+        functionName: StartVFX
+        data: 
+        objectReferenceParameter: {fileID: 5874598413603817476, guid: 6e3727966ad41d344ad2878263471112, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9915313
+        functionName: StopVFX
+        data: 
+        objectReferenceParameter: {fileID: 5874598413603817476, guid: 6e3727966ad41d344ad2878263471112, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

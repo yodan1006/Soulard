@@ -19,14 +19,14 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Civil
   - Enemy
   - BulletEnemy
   - BulletPlayer
-  - 
-  - 
-  - 
-  - 
+  - Decors
+  - bottleColPlayer
+  - BulletCivil
+  - bottleColEnemy
   - 
   - 
   - 

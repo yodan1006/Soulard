@@ -33,10 +33,13 @@ namespace EnemyIa.Runtime
                 if (playerObject != null)
                     _target = playerObject;
             }
+            
+            //VaumitoPrefab.transform.position = _VaumitoZone.transform.position;
         }
 
         private void Update()
         {
+            VaumitoPrefab.transform.position = _VaumitoZone.transform.position;
             switch (_etat)
             {
                 case Etat.spawn:
@@ -122,6 +125,16 @@ namespace EnemyIa.Runtime
             }
         }
 
+        public void StartVFX()
+        {
+            VaumitoPrefab.GetComponent<ParticleSystem>().Play();
+        }
+
+        public void StopVFX()
+        {
+            VaumitoPrefab.GetComponent<ParticleSystem>().Stop();
+        }
+
         #endregion
 
 
@@ -173,6 +186,9 @@ namespace EnemyIa.Runtime
         [SerializeField] public Animator _animator;
         [SerializeField] private Transform _shootPoint;
         [SerializeField] private float _tumbleForce = 10f;
+
+        [SerializeField] private Transform _VaumitoZone;
+        [SerializeField] private GameObject VaumitoPrefab;
 
         [SerializeField] private GameObject armature;
         [SerializeField] private Material _colorPNJIdle;
