@@ -22,7 +22,7 @@ namespace Movement.Runtime
         }
 
         
-        void FixedUpdate()
+        void Update()
         {
             Vector3 movementVector = transform.TransformDirection(new Vector3(_move.x, 0, _move.y));
             _rigidbody.linearVelocity = movementVector * _moveSpeed ;

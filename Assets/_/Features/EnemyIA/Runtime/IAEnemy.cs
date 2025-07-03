@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using UnityEditor.Animations;
+//using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -182,7 +182,7 @@ namespace EnemyIa.Runtime
         [SerializeField] private float _timeAttack;
         [SerializeField] private float _interval;
         [SerializeField] private bool _OnTouched;
-        [SerializeField] private List<AnimatorController> _animatorControllers;
+        [SerializeField] private List<RuntimeAnimatorController> _animatorControllers;
         [SerializeField] public Animator _animator;
         [SerializeField] private Transform _shootPoint;
         [SerializeField] private float _tumbleForce = 10f;
