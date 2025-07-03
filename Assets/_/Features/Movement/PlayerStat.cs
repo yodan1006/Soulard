@@ -27,16 +27,22 @@ namespace Movement.Runtime
         
         void Update()
         {
+            _VaumitoPrefab.transform.position = _VaumitoPointPlay.position;
             _healthSlider.value = _currentHealth;
             m_currentHealth = _currentHealth;
             
             if (_ultimate)
             {
+                //vfx play
+                _VaumitoPrefab.SetActive(true);
                 _delayTimeUltimate += Time.deltaTime;
                 _currentHealth = _maxHealth/2;
             }
             if (_delayTimeUltimate >= _ultimateTimer)
             {
+                //vfx stop
+                _VaumitoPrefab.SetActive(false);
+                _delayTimeUltimate = 0;
                 _colliderUltimate.enabled = false;
                 _ultimate = false;
             }
@@ -76,10 +82,11 @@ namespace Movement.Runtime
         public void Ultimate(InputAction.CallbackContext context)
         {
             if (Time.timeScale == 0) return;
-            if (context.performed && _currentHealth == _maxHealth)
+            if (context.started && _currentHealth == _maxHealth)
             {
                 _colliderUltimate.enabled = true;
                 _ultimate = true;
+                Debug.Log("Ultimate");
             }
             
         }
@@ -168,6 +175,10 @@ namespace Movement.Runtime
         [SerializeField] private Collider _colliderUltimate;
         [SerializeField] private float _ultimateTimer;
         [SerializeField] private Canvas _gameOver;
+        
+        [Header("VFX ultimate")]
+        [SerializeField] GameObject _VaumitoPrefab;
+        [SerializeField] Transform _VaumitoPointPlay;
 
         
         private int _currentHealth;

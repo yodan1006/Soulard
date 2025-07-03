@@ -24,9 +24,9 @@ TagManager:
   - BulletEnemy
   - BulletPlayer
   - Decors
-  - bottleBottle
+  - bottleColPlayer
   - BulletCivil
-  - 
+  - bottleColEnemy
   - 
   - 
   - 
