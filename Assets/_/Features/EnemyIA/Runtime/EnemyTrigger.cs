@@ -44,12 +44,12 @@ namespace EnemyIa.Runtime
         private void OnTriggerEnter(Collider other)
         {
             if (Time.timeScale == 0) return;
-            if (other.gameObject.layer == LayerMask.NameToLayer("BulletPlayer"))
+            if (other.gameObject.layer == LayerMask.NameToLayer("BulletPlayer") || other.gameObject.layer == LayerMask.NameToLayer("BulletCivil"))
             {
                 //animator.SetBool()
                 _OnAnimeTouchPlay = true;
                 _heath--;
-                Debug.Log("il m'a toucher");
+                //Debug.Log("il m'a toucher");
             }
         }
 
