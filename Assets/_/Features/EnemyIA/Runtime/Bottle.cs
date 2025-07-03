@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 // Assurez-vous que le préfabriqué de la bouteille a bien un Rigidbody
@@ -37,5 +38,10 @@ public class Bottle : MonoBehaviour
     {
         if (Time.timeScale == 0) return;
         m_launcher = launcherGameObject;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
     }
 }
