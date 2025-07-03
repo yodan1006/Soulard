@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8989809203330952586}
   - component: {fileID: 8260040623082480530}
   m_Layer: 0
-  m_Name: VFX_Puke
+  m_Name: VFX_Ulti
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
