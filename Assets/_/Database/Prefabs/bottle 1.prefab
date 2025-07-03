@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2073059744282480794}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: scale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 301452990880685162}
   - component: {fileID: 755775980750287491}
   - component: {fileID: 9040557868326903795}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: bottle 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2765624904506054919, guid: ba81a571dfedde8439e912c0b0ce91b4, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 3254600176894919613, guid: ba81a571dfedde8439e912c0b0ce91b4, type: 3}
       propertyPath: m_LocalPosition.x

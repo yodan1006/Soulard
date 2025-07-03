@@ -43,6 +43,7 @@ namespace EnemyIa.Runtime
 
         private void OnTriggerEnter(Collider other)
         {
+            if (Time.timeScale == 0) return;
             if (other.gameObject.layer == LayerMask.NameToLayer("BulletPlayer"))
             {
                 //animator.SetBool()

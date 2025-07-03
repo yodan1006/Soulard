@@ -31,7 +31,7 @@ namespace Shooter.Runtime
                     {
                         missileCount = 2;
                     }
-                    else
+                    else if (health.m_currentHealth < bonus1 && health.m_currentHealth < bonus2)
                     {
                         missileCount = 1;
                     }
@@ -44,6 +44,7 @@ namespace Shooter.Runtime
 
                 public void Tir(InputAction.CallbackContext context)
                 {
+                    if (Time.timeScale == 0) return;
                     if (context.performed)
                     Bubbleshoot();
                 }

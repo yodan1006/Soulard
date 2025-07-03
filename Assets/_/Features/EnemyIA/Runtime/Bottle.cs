@@ -19,6 +19,7 @@ public class Bottle : MonoBehaviour
     /// <param name="tumbleForce">La force de la rotation.</param>
     public void InitializeTumble(Vector3 flightDirection, float tumbleForce)
     {
+        if (Time.timeScale == 0) return;
         if (rb == null) return;
 
         // On calcule l'axe de rotation.
@@ -34,6 +35,7 @@ public class Bottle : MonoBehaviour
 
     public void SetLauncher(GameObject launcherGameObject)
     {
+        if (Time.timeScale == 0) return;
         m_launcher = launcherGameObject;
     }
 }

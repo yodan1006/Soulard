@@ -46,6 +46,7 @@ namespace EnemyGenerator.Runtime
 
         private void SpawnEnemys()
         {
+            if (Time.timeScale == 0) return;
             for (int i = 0; i < _nbSpawn; i++)
             {
                 
