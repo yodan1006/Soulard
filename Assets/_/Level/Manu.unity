@@ -17683,6 +17683,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Small_Bar
       objectReference: {fileID: 0}
+    - target: {fileID: 4503570079957928405, guid: ef819788e31e04745bfe299837ceade8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.218
+      objectReference: {fileID: 0}
     - target: {fileID: 5625162046529432829, guid: ef819788e31e04745bfe299837ceade8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -27
@@ -17722,6 +17726,14 @@ PrefabInstance:
     - target: {fileID: 5625162046529432829, guid: ef819788e31e04745bfe299837ceade8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6339856830102407171, guid: ef819788e31e04745bfe299837ceade8, type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: 94f16348272bb2942a004c797d1b1643, type: 2}
+    - target: {fileID: 6779573998201040220, guid: ef819788e31e04745bfe299837ceade8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.11
       objectReference: {fileID: 0}
     - target: {fileID: 7069788863337914741, guid: ef819788e31e04745bfe299837ceade8, type: 3}
       propertyPath: m_Size.z
