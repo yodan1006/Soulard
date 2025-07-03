@@ -1,6 +1,7 @@
 using System;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GestionCam : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class GestionCam : MonoBehaviour
             _cameraDeFin.Priority = 50;
             
             _Player.GetComponent<Animator>().SetBool("IsWin", true);
+            _Player.GetComponent<PlayerInput>().enabled = false;
+            _Player.GetComponent<Collider>().enabled = false;
         }
     }
 }

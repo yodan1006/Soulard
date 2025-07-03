@@ -189,7 +189,6 @@ GameObject:
   - component: {fileID: 4028390096584736796}
   - component: {fileID: 5699636782216000675}
   - component: {fileID: 1362995195147158729}
-  - component: {fileID: 3049875867874072388}
   - component: {fileID: 3551360893965649376}
   m_Layer: 6
   m_Name: Player
@@ -540,21 +539,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &3049875867874072388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3474279162798319714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bc5e665e812db54fb0b2f2ae89f3b8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cameraInGame: {fileID: 718120214817412008}
-  _cameraDeFin: {fileID: 496575523360765270}
-  _Player: {fileID: 3474279162798319714}
 --- !u!136 &3551360893965649376
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1468,7 +1452,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6347169216323322074, guid: 37d622a9874f0454ba3445281f0f06ca, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.251
       objectReference: {fileID: 0}
     - target: {fileID: 6347169216323322074, guid: 37d622a9874f0454ba3445281f0f06ca, type: 3}
       propertyPath: m_LocalPosition.z
