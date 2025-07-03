@@ -58,7 +58,7 @@ namespace Movement.Runtime
             if (zone != null)
             {   
                 _zone = zone;
-                // _zoneLife = true;
+                _zoneLife = true;
             }
         }
 
@@ -69,7 +69,7 @@ namespace Movement.Runtime
             if (zone != null && zone == _zone)
             {
                 _zone = null;
-                // _zoneLife = false;
+                _zoneLife = false;
             }
         }
 
@@ -161,7 +161,7 @@ namespace Movement.Runtime
         [Header("Layer Health")]
         [SerializeField] private LayerMask _layerHealth;
         
-        // private bool _zoneLife;
+        private bool _zoneLife;
         private LifeZone _zone;
         
         [Header("Ultimate")]
