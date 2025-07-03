@@ -11,6 +11,7 @@ namespace AreneModificateur.Runtime
 
         private void OnTriggerEnter(Collider other)
         {
+            if (Time.timeScale == 0) return;
             _spawnEnemy.m_interval -= _modificateur;
         }
     }

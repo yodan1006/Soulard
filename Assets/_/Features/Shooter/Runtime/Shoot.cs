@@ -1,3 +1,4 @@
+using Movement.Runtime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,7 +23,18 @@ namespace Shooter.Runtime
         
                 private void Update()
                 {
-                    
+                    if (health.m_currentHealth >= bonus2)
+                    {
+                        missileCount = 3;
+                    }
+                    else if (health.m_currentHealth >= bonus1 && health.m_currentHealth < bonus2)
+                    {
+                        missileCount = 2;
+                    }
+                    else if (health.m_currentHealth < bonus1 && health.m_currentHealth < bonus2)
+                    {
+                        missileCount = 1;
+                    }
                 }
         
                 #endregion
@@ -32,6 +44,7 @@ namespace Shooter.Runtime
 
                 public void Tir(InputAction.CallbackContext context)
                 {
+                    if (Time.timeScale == 0) return;
                     if (context.performed)
                     Bubbleshoot();
                 }
@@ -89,7 +102,11 @@ namespace Shooter.Runtime
                 [SerializeField] private PoolMunition poolMunition;
                 [SerializeField] private Transform shootPoint;
                 [SerializeField] private float shootForce;
-                
+                [SerializeField] private int bonus1;
+                [SerializeField] private int bonus2;
+
+                [SerializeField] private PlayerStat health;
+
                 #endregion
     }
 }

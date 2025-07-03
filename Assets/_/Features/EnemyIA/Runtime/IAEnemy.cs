@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using UnityEditor.Animations;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,13 +15,15 @@ namespace EnemyIa.Runtime
 
 
         #region Unity Api
-
-        private void Awake()
-        {
-        }
+        
 
         private void Start()
         {
+            // Il est recommandé de définir une distance d'arrêt.
+            // L'agent s'arrêtera à 1.5 unité de distance de sa cible.
+            // Ajustez cette valeur en fonction de la taille de votre agent et de vos besoins.
+            _agent.stoppingDistance = 3f; 
+            
             int random = UnityEngine.Random.Range(0, _animatorControllers.Count);
             _animator.runtimeAnimatorController = _animatorControllers[random];
             
@@ -39,56 +39,87 @@ namespace EnemyIa.Runtime
         {
             switch (_etat)
             {
+                case Etat.spawn:
+                    armature.GetComponent<SkinnedMeshRenderer>().material = _colorSpawn;
+                    AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+                    _animator.SetBool("Spawn", true);
+                    if (stateInfo.IsName("Spawn") && stateInfo.normalizedTime >= 0.6f)
+                    {
+                        _animator.SetBool("Spawn", false);
+                        _etat = Etat.Attack;
+                    }
+                    break;
                 case Etat.idle:
                     if (_typeIa == TypeIA.civil)
                     {
-                        //_animator.SetBool()
+                        armature.GetComponent<SkinnedMeshRenderer>().material = _colorPNJIdle;
                     }
                     break;
                 case Etat.Attack:
-                    _timeAttack += Time.deltaTime;
-                    _animator.SetBool("OnMove", true);
-                    Attack(_target);
+                    armature.GetComponent<SkinnedMeshRenderer>().material = _colorAttack;
+                    _agent.SetDestination(_target.transform.position); // On définit la destination
+                    
+                    // On vérifie si l'agent est arrivé à destination (en tenant compte de la stoppingDistance)
+                    if (_agent.remainingDistance <= _agent.stoppingDistance)
+                    {
+                        // Si l'agent est assez proche, il s'arrête de bouger et attaque
+                        _animator.SetBool("OnMove", false);
+                        transform.LookAt(_target.transform);
+                        _timeAttack += Time.deltaTime;
+                        Attack(_target);
+                    }
+                    else
+                    {
+                        // Sinon, il continue de bouger
+                        _animator.SetBool("OnMove", true);
+                        _timeAttack += Time.deltaTime;
+                        Attack(_target);
+                        transform.LookAt(_target.transform);
+                    }
+                    break;
+                case Etat.vaumito:
+                    armature.GetComponent<SkinnedMeshRenderer>().material = _colorVaumito;
                     break;
             }
         }
 
         private void Attack(GameObject target)
         {
-            AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
-            _agent.SetDestination(target.transform.position);
-            if (Vector3.Distance(_agent.transform.position, target.transform.position) < _distanceForMelee)
-                Melee();
-            else if (_timeAttack >= _interval)
+            if (Time.timeScale == 0) return;
+            // On vérifie s'il est temps de lancer une nouvelle attaque
+            if (_timeAttack >= _interval)
             {
+                // On déclenche l'animation d'attaque.
+                // L'événement d'animation s'occupera de lancer la bouteille au bon moment.
                 _animator.SetBool("OnAttack", true);
-                JetBottle(target);
-                _timeAttack = 0.0f;
-                if (stateInfo.IsName("Throw") && stateInfo.normalizedTime >= 1)
-                    _animator.SetBool("OnAttack", false);
+                _timeAttack = 0.0f; // On réinitialise le compteur
             }
 
+            // On garde cette logique pour réinitialiser le booléen une fois l'animation terminée.
+            AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+            if (stateInfo.IsName("Throw") && stateInfo.normalizedTime >= 0.6f)
+            {
+                _animator.SetBool("OnAttack", false);
+            }
         }
 
         private void JetBottle(GameObject target)
         {
-            GameObject bottle = Instantiate(_bottlePrefab, transform.position, Quaternion.identity);
+            if (Time.timeScale == 0) return;
+            GameObject bottle = Instantiate(_bottlePrefab, _shootPoint.position, Quaternion.identity);
             Rigidbody rb = bottle.GetComponent<Rigidbody>();
             
             Vector3 dir = (target.transform.position - transform.position).normalized;
-
             Bottle bottleScript = bottle.GetComponent<Bottle>();
-            bottleScript.launcher = gameObject;
-            bottleScript.InitDirection(dir);
+            bottleScript.SetLauncher(gameObject);
+            bottleScript.InitializeTumble(dir, _tumbleForce);
+
+            //bottleScript.launcher = gameObject;
+            //bottleScript.InitDirection(dir);
             if (rb != null)
             {
                 rb.AddForce(dir * _jetForce, ForceMode.Impulse);
             }
-        }
-
-        private void Melee()
-        {
-            Debug.Log("Melee");
         }
 
         #endregion
@@ -96,13 +127,25 @@ namespace EnemyIa.Runtime
 
         #region Utils
 
-        public void SetTarget(GameObject newTarget)
+        // AJOUTEZ CETTE NOUVELLE MÉTHODE PUBLIQUE
+        // Elle sera appelée par l'événement d'animation.
+        public void AnimationEvent_ThrowBottle()
         {
-            if (_typeIa == TypeIA.enemy || _etat == Etat.Attack) return;
-            _target = newTarget;
-            _etat = Etat.Attack;
-            _OnTouched = true;
+            if (Time.timeScale == 0) return;
+            if (_target != null)
+            {
+                JetBottle(_target);
+            }
         }
+
+         public void SetTarget(GameObject newTarget)
+         {
+             if (Time.timeScale == 0) return;
+            if (_typeIa == TypeIA.enemy || _etat == Etat.Attack) return;
+             _target = newTarget;
+            _etat = Etat.Attack;
+             _OnTouched = true;
+         }
 
         #endregion
 
@@ -116,25 +159,34 @@ namespace EnemyIa.Runtime
         
         #region Privates
         
-        [SerializeField] private NavMeshAgent _agent;
-        [SerializeField] private Etat _etat;
+        [SerializeField] public NavMeshAgent _agent;
+        public Etat _etat; 
         [SerializeField] private TypeIA _typeIa;
         private bool _OnAttack;
         private GameObject _target;
-        [SerializeField] private float _distanceForMelee;
         [SerializeField] private GameObject _bottlePrefab;
         [SerializeField] private float _jetForce;
         [SerializeField] private float _timeAttack;
         [SerializeField] private float _interval;
         [SerializeField] private bool _OnTouched;
         [SerializeField] private List<AnimatorController> _animatorControllers;
-        [SerializeField] private Animator _animator;
+        [SerializeField] public Animator _animator;
+        [SerializeField] private Transform _shootPoint;
+        [SerializeField] private float _tumbleForce = 10f;
+
+        [SerializeField] private GameObject armature;
+        [SerializeField] private Material _colorPNJIdle;
+        [SerializeField] private Material _colorAttack;
+        [SerializeField] private Material _colorSpawn;
+        [SerializeField] private Material _colorVaumito;
 
 
-        private enum Etat
+        public enum Etat
         {
             idle,
             Attack,
+            spawn,
+            vaumito
         }
         #endregion
 

@@ -1,4 +1,3 @@
-using System;
 using Life.Runtime;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -45,6 +44,7 @@ namespace Movement.Runtime
 
         private void OnTriggerEnter(Collider other)
         {
+            if (Time.timeScale == 0) return;
             if (other.gameObject.layer == LayerMask.NameToLayer("BulletEnemy"))
             {
                 Damage();
@@ -53,26 +53,29 @@ namespace Movement.Runtime
 
         private void OnTriggerStay(Collider other)
         {
+            if (Time.timeScale == 0) return;
             var zone = other.GetComponent<LifeZone>();
             if (zone != null)
             {   
                 _zone = zone;
-                _zoneLife = true;
+                // _zoneLife = true;
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
+            if (Time.timeScale == 0) return;
             var zone = other.GetComponent<LifeZone>();
             if (zone != null && zone == _zone)
             {
                 _zone = null;
-                _zoneLife = false;
+                // _zoneLife = false;
             }
         }
 
         public void Ultimate(InputAction.CallbackContext context)
         {
+            if (Time.timeScale == 0) return;
             if (context.performed && _currentHealth == _maxHealth)
             {
                 _colliderUltimate.enabled = true;
@@ -83,6 +86,7 @@ namespace Movement.Runtime
 
         public void PickUpBottle(InputAction.CallbackContext context)
         {
+            if (Time.timeScale == 0) return;
             if (context.started && _zone != null)
             {
                 if (_zone.m_currentnumbers >= 1)
@@ -95,6 +99,10 @@ namespace Movement.Runtime
             }
         }
 
+        private void AmmoShootNumber()
+        {
+            
+        }
         #endregion
         
         
@@ -127,7 +135,13 @@ namespace Movement.Runtime
 
         private void Death()
         {
-            if (_currentHealth <= 0) gameObject.SetActive(false);
+            if (_currentHealth <= 0)
+            {
+                gameObject.SetActive(false);
+                PlayerInput playerInput = GetComponent<PlayerInput>();
+                playerInput.enabled = false;
+                _gameOver.gameObject.SetActive(true);
+            }
         }
         
         #endregion
@@ -139,7 +153,7 @@ namespace Movement.Runtime
         [SerializeField] private Slider _healthSlider;
         
         [Header("Time Health")]
-        [SerializeField] private float _timerHealth = 3f;
+        // [SerializeField] private float _timerHealth = 3f;
         
         [Header("Layer Damage")]
         [SerializeField] private LayerMask _layerMask;
@@ -147,12 +161,13 @@ namespace Movement.Runtime
         [Header("Layer Health")]
         [SerializeField] private LayerMask _layerHealth;
         
-        private bool _zoneLife;
+        // private bool _zoneLife;
         private LifeZone _zone;
         
         [Header("Ultimate")]
         [SerializeField] private Collider _colliderUltimate;
         [SerializeField] private float _ultimateTimer;
+        [SerializeField] private Canvas _gameOver;
 
         
         private int _currentHealth;

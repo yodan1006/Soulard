@@ -1,38 +1,47 @@
 using System;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-namespace EnemyIa.Runtime
+// Assurez-vous que le préfabriqué de la bouteille a bien un Rigidbody
+[RequireComponent(typeof(Rigidbody))]
+public class Bottle : MonoBehaviour
 {
-    public class Bottle : MonoBehaviour
+    private Rigidbody rb;
+    public GameObject m_launcher;
+
+    void Awake()
     {
-        public GameObject launcher;
-        private Vector3 _moveDirection;
+        rb = GetComponent<Rigidbody>();
+    }
 
-        public void InitDirection(Vector3 moveDirection)
-        {
-            _moveDirection = moveDirection.normalized;
-        }
+    /// <summary>
+    /// Initialise la culbute de la bouteille.
+    /// </summary>
+    /// <param name="flightDirection">La direction dans laquelle la bouteille est lancée.</param>
+    /// <param name="tumbleForce">La force de la rotation.</param>
+    public void InitializeTumble(Vector3 flightDirection, float tumbleForce)
+    {
+        if (Time.timeScale == 0) return;
+        if (rb == null) return;
 
-        private void Update()
-        {
-            RotationObject();
-        }
+        // On calcule l'axe de rotation.
+        // Vector3.Cross produit un vecteur perpendiculaire aux deux vecteurs en entrée.
+        // En le calculant entre la direction du vol et l'axe "haut" (Vector3.up),
+        // on obtient un axe de rotation parfaitement horizontal et perpendiculaire à la trajectoire.
+        Vector3 rotationAxis = Vector3.Cross(flightDirection, Vector3.up);
 
-        private void RotationObject()
-        {
-            _moveDirection.z -= 90f;
-            transform.Rotate(_moveDirection, 720f * Time.deltaTime);
-        }
+        // On applique une impulsion de rotation unique autour de cet axe.
+        // ForceMode.Impulse applique la force instantanément, comme un "coup" de poignet au lancer.
+        rb.AddTorque(-rotationAxis.normalized * tumbleForce, ForceMode.Impulse);
+    }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            
-            IAEnemy enemy = other.gameObject.GetComponent<IAEnemy>();
-            if (enemy != null)
-            {
-                enemy.SetTarget(launcher);
-            }
-        }
+    public void SetLauncher(GameObject launcherGameObject)
+    {
+        if (Time.timeScale == 0) return;
+        m_launcher = launcherGameObject;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
     }
 }
