@@ -49,7 +49,7 @@ namespace EnemyIa.Runtime
                 //animator.SetBool()
                 _OnAnimeTouchPlay = true;
                 _heath--;
-                Debug.Log("il m'a toucher");
+                //Debug.Log("il m'a toucher");
             }
         }
 

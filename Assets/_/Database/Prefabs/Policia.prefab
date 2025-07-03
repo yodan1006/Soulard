@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608dd196198d6164baac596d41fde8da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeDispawn: 0
+  _timeDispawn: 4
   _poolEnemy: {fileID: 0}
   _heath: 5
 --- !u!114 &637694885306770882
@@ -197,7 +197,7 @@ MonoBehaviour:
   _tumbleForce: 1
   _VaumitoZone: {fileID: 7360248425770441538}
   VaumitoPrefab: {fileID: 1045624465737233005}
-  armature: {fileID: 215419140943175872}
+  armature: {fileID: 3052685490369593757}
   _colorPNJIdle: {fileID: 2100000, guid: d5c12d00f5a59cf4fbcd7dc10322859a, type: 2}
   _colorAttack: {fileID: 2100000, guid: 292214b518089484087d0548ba84802c, type: 2}
   _colorSpawn: {fileID: 2100000, guid: 3389d13e541d3564b9065462e1c673cc, type: 2}
@@ -821,14 +821,14 @@ PrefabInstance:
       addedObject: {fileID: 7360248425770441538}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 333653e7ec30dad4dac74ca1fee926e8, type: 3}
---- !u!1 &215419140943175872 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 333653e7ec30dad4dac74ca1fee926e8, type: 3}
-  m_PrefabInstance: {fileID: 1025759964849888657}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &699889993409935994 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 333653e7ec30dad4dac74ca1fee926e8, type: 3}
+  m_PrefabInstance: {fileID: 1025759964849888657}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3052685490369593757 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2621493037507402764, guid: 333653e7ec30dad4dac74ca1fee926e8, type: 3}
   m_PrefabInstance: {fileID: 1025759964849888657}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7570981875630039837 stripped

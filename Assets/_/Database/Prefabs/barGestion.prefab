@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c10c050f90fe6044a0fa941c9c66d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_prefabSlime:
+  m_prefabenemy:
   - {fileID: 3177360103660308512, guid: 52913252f1630bf4488acc8e6588126c, type: 3}
 --- !u!1 &7825357279681670528
 GameObject:
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c10c050f90fe6044a0fa941c9c66d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_prefabSlime:
+  m_prefabenemy:
   - {fileID: 3177360103660308512, guid: 52913252f1630bf4488acc8e6588126c, type: 3}
 --- !u!1001 &1302417657616701260
 PrefabInstance:
@@ -313,7 +313,8 @@ PrefabInstance:
       propertyPath: '_spawnPoint.Array.data[19]'
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7411690202349710554, guid: 43b2044ad2bae1746bb37c1879d4da90, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6108502361555281319, guid: 43b2044ad2bae1746bb37c1879d4da90, type: 3}
     - {fileID: 9211824959104959970, guid: 43b2044ad2bae1746bb37c1879d4da90, type: 3}

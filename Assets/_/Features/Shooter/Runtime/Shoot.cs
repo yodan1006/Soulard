@@ -69,7 +69,7 @@ namespace Shooter.Runtime
                                          rb.linearVelocity = Vector3.zero; // Réinitialise la vitesse
                                          float angle = startAngle + angleStep * i;
                                          Vector3 dir = Quaternion.Euler(0, angle, 0) * shootPoint.forward;
-                                         rb.AddForce(dir * shootForce, ForceMode.Impulse);
+                                         rb.AddForce(-dir * shootForce, ForceMode.Impulse);
                                      }
                                  }
                              }

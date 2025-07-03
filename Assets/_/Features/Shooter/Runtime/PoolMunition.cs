@@ -12,7 +12,7 @@ namespace Shooter.Runtime
 
         private List<GameObject> bubblesPool;
 
-        private void Awake()
+        private void Start()
         {
             bubblesPool = new List<GameObject>();
 
