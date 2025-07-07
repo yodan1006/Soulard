@@ -24425,6 +24425,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3485240087899531263, guid: 7c9a999438d199c44a9eb8398a10c330, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3485240087899531263, guid: 7c9a999438d199c44a9eb8398a10c330, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.005
+      objectReference: {fileID: 0}
     - target: {fileID: 4659489686088977320, guid: 7c9a999438d199c44a9eb8398a10c330, type: 3}
       propertyPath: m_Name
       value: Street 1
